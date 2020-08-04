@@ -29,11 +29,11 @@ app.use(express.static("public"));
 
 // Connect to the Mongo DB
 
-var MONGODB_URI = process.env.MONGODB_URI
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
+// var MONGODB_URI = process.env.MONGODB_URI
+// mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
 
-// mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
-
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/Article";
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 // / Routes
 
 // A GET route for scraping the echoJS website
@@ -44,7 +44,7 @@ app.get("/scrape", function (req, res) {
         var $ = cheerio.load(response.data);
 
         // Now, we grab every h2 within an article tag, and do the following:
-        $("article h2").each(function (i, element) {
+        $("item-info h2").each(function (i, element) {
             // Save an empty result object
             var result = {};
 
@@ -52,6 +52,10 @@ app.get("/scrape", function (req, res) {
             result.title = $(this)
                 .children("a")
                 .text();
+            result.teaser = $(this)
+                .children("p")
+                .text()
+                .attr("href");
             result.link = $(this)
                 .children("a")
                 .attr("href");
