@@ -36,7 +36,7 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/Article";
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 // / Routes
 
-// A GET route for scraping the echoJS website
+// A GET route for scraping the NPR website
 app.get("/scrape", function (req, res) {
     // First, we grab the body of the html with axios
     axios.get("https://www.npr.org/sections/news/").then(function (response) {
@@ -44,19 +44,22 @@ app.get("/scrape", function (req, res) {
         var $ = cheerio.load(response.data);
 
         // Now, we grab every h2 within an article tag, and do the following:
-        $("item-info h2").each(function (i, element) {
+        $("div.item-info").each(function (i, element) {
             // Save an empty result object
+            console.log("$this");
             var result = {};
 
             // Add the text and href of every link, and save them as properties of the result object
             result.title = $(this)
+                .children("h2")
                 .children("a")
                 .text();
             result.teaser = $(this)
                 .children("p")
-                .text()
-                .attr("href");
+                .children("a")
+                .text();
             result.link = $(this)
+                .children("h2")
                 .children("a")
                 .attr("href");
 
