@@ -1,19 +1,33 @@
+
+
 // Grab the articles as a json
+
 $.getJSON("/articles", function (data) {
     // For each one
     for (var i = 0; i < data.length; i++) {
         // Display the apropos information on the page
-        $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + data[i].teaser + "</p>");
+
+        $("#articles").append("<h2 data-id='" + data[i]._id + "'>" + data[i].title + "</h2>" + data[i].link + "<br />" + "<br />" + data[i].teaser + "<hr>" + "</hr>" + "</h2>");
+
+        // Gives undefined title in note and disconnections from function 
+        // $("#articles").append("<p data-id='" + data[i]._id + "'>" + "<h2>" + data[i].title + "</h2>" + data[i].link + "<br />" + "<br />" + data[i].teaser + "<hr>" + "</hr>" + "</p>");
+
+        // Working with breaks and line but removed h2
+        // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + data[i].link + "<br />" + "<br />" + data[i].teaser + "<hr>" + "</hr>" + "</p>");
+
+        // Original Working with No Stylying 
+        // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + data[i].teaser + "</p>");
     }
 });
 
 
-// Whenever someone clicks a p tag
-$(document).on("click", "p", function () {
+// Whenever someone clicks a h2 tag
+$(document).on("click", "h2", function () {
     // Empty the notes from the note section
     $("#notes").empty();
     // Save the id from the p tag
     var thisId = $(this).attr("data-id");
+    // console.log("data-id")
 
     // Now make an ajax call for the Article
     $.ajax({
@@ -69,4 +83,13 @@ $(document).on("click", "#savenote", function () {
     // Also, remove the values entered in the input and textarea for note entry
     $("#titleinput").val("");
     $("#bodyinput").val("");
+});
+
+
+$(document).on("click", ".clear", function () {
+    $("#articles").hide();
+});
+
+$(document).on("click", ".scrape-new", function () {
+    $("#articles").show();
 });

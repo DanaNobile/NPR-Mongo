@@ -33,10 +33,13 @@ app.use(express.static("public"));
 // mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/Article";
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 // / Routes
 
 // A GET route for scraping the NPR website
+
+
+
 app.get("/scrape", function (req, res) {
     // First, we grab the body of the html with axios
     axios.get("https://www.npr.org/sections/news/").then(function (response) {
@@ -79,6 +82,9 @@ app.get("/scrape", function (req, res) {
         res.send("Scrape Complete");
     });
 });
+
+
+
 
 // Route for getting all Articles from the db
 app.get("/articles", function (req, res) {
