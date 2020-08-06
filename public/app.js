@@ -72,7 +72,15 @@ $(document).on("click", "#savenote", function () {
             // Value taken from note textarea
             body: $("#bodyinput").val()
         }
+
     })
+
+        // var note = $("#bodyinput").val()
+        // var test = $("#test")
+
+        // note.append(test)
+
+
         // With that done
         .then(function (data) {
             // Log the response
@@ -85,6 +93,10 @@ $(document).on("click", "#savenote", function () {
     $("#titleinput").val("");
     $("#bodyinput").val("");
 });
+
+
+
+
 
 
 $(document).on("click", ".clear", function () {
