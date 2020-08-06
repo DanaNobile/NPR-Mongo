@@ -21,6 +21,7 @@ $.getJSON("/articles", function (data) {
 });
 
 
+
 // Whenever someone clicks a h2 tag
 $(document).on("click", "h2", function () {
     // Empty the notes from the note section
@@ -92,4 +93,9 @@ $(document).on("click", ".clear", function () {
 
 $(document).on("click", ".scrape-new", function () {
     $("#articles").show();
+    $.get("/scrape", function (data) {
+        console.log("scraped")
+    })
+
+
 });
