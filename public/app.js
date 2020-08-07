@@ -8,15 +8,6 @@ $.getJSON("/articles", function (data) {
         // Display the apropos information on the page
 
         $("#articles").append("<h2 data-id='" + data[i]._id + "'>" + data[i].title + "</h2>" + data[i].link + "<br />" + "<br />" + data[i].teaser + "<hr>" + "</hr>" + "</h2>");
-
-        // Gives undefined title in note and disconnections from function 
-        // $("#articles").append("<p data-id='" + data[i]._id + "'>" + "<h2>" + data[i].title + "</h2>" + data[i].link + "<br />" + "<br />" + data[i].teaser + "<hr>" + "</hr>" + "</p>");
-
-        // Working with breaks and line but removed h2
-        // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + data[i].link + "<br />" + "<br />" + data[i].teaser + "<hr>" + "</hr>" + "</p>");
-
-        // Original Working with No Stylying 
-        // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + data[i].teaser + "</p>");
     }
 });
 
