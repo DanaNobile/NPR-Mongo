@@ -76,6 +76,7 @@ app.get("/scrape", function (req, res) {
 
 app.get("/cleararticles", function (req, res) {
     db.Article.remove({}).then(function (dbArticle) {
+        res.end()
         console.log(dbArticle);
     });
 });
