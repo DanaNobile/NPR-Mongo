@@ -85,7 +85,7 @@ app.get("/cleararticles", function (req, res) {
 app.get("/articles", function (req, res) {
     // Grab every document in the Articles collection
     db.Article.find({})
-        .sort({ "link": -1 })
+        // .sort({ "link": -1 })
         .then(function (dbArticle) {
             // If we were able to successfully find Articles, send them back to the client
             res.json(dbArticle);
